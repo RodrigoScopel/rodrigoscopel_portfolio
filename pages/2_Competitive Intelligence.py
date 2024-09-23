@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
 import seaborn as sns
-# from streamlit_dimensions import st_dimensions
+from streamlit_dimensions import st_dimensions
 # import mplcyberpunk
 
 
