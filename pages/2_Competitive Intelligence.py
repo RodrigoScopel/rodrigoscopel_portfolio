@@ -4,7 +4,7 @@ import streamlit as st
 import seaborn as sns
 from streamlit_dimensions import st_dimensions
 import numpy as np
-import mplcyberpunk
+# import mplcyberpunk
 
 
 st.set_page_config(page_title="Competitive Intelligence", layout="wide",initial_sidebar_state="expanded")
@@ -161,7 +161,7 @@ with st.expander("Social Media Presence", expanded=True):
         width = 0.3  # the width of the bars
         multiplier = 0
 
-        plt.style.use("cyberpunk")
+        # plt.style.use("cyberpunk")
         
 
         # fig = plt.figure(dpi=200)
@@ -224,7 +224,7 @@ with st.expander("Web Traffic and Global Presence", expanded=False):
         ax.set_yticks([])
 
         r2 = ax.bar(df_rank_growth['company'],df_rank_growth['monthly_rank_growth'], color=['C0','C1'])
-        mplcyberpunk.add_bar_gradient(bars=r2)
+        # mplcyberpunk.add_bar_gradient(bars=r2)
         ax.bar_label(r2, color="red", fontsize=10)
         
         st.pyplot(fig)
@@ -287,7 +287,7 @@ with st.expander("User Engagement", expanded=False):
         ax.set_yticks([])
 
         r3 = ax.bar(df__user_engagement['company'],df__user_engagement['visit_duration'], color=['C2','C3'])
-        mplcyberpunk.add_bar_gradient(bars=r3)
+        # mplcyberpunk.add_bar_gradient(bars=r3)
         ax.bar_label(r3, color="red", fontsize=10)
         st.pyplot(fig)
 
