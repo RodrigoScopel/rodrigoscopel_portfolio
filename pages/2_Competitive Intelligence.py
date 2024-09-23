@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import seaborn as sns
 from streamlit_dimensions import st_dimensions
-import numnpy as np
+import numpy as np
 # import mplcyberpunk
 
 
