@@ -142,7 +142,7 @@ col1, col2 = st.columns(2)
 st.markdown('')
 
 with st.expander("Social Media Presence", expanded=True):
-   col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
     with col1:
         st.header("Social Media Presence")
         cont_size=st_dimensions(key="main")['width']
