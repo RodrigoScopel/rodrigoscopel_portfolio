@@ -1,0 +1,8 @@
+[server]
+enableStaticServing = true
+
+[global]
+dataFrameSerialization = "legacy"
+
+[theme]
+base = "dark"
