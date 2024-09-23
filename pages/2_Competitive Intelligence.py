@@ -281,7 +281,7 @@ with st.expander("User Engagement", expanded=False):
         fig.set(facecolor="#0E1117")
         plt.box(False)
         ax.set_ylabel('')
-        ax.legend(loc='upper center', ncols=3, fontsize = 10)
+        # ax.legend(loc='upper center', ncols=3, fontsize = 10)
         ax.grid(False)
         ax.set(facecolor = "#0E1117")
         ax.set_yticks([])
