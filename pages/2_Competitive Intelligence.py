@@ -142,10 +142,51 @@ col1, col2 = st.columns(2)
 st.markdown('')
 
 with st.expander("Social Media Presence", expanded=True):
-    col1, col2 = st.columns(2)
+   col1, col2 = st.columns(2)
     with col1:
         st.header("Social Media Presence")
-        st.bar_chart(df_social_media_presence.groupby('company').mean().astype(str),use_container_width=True,horizontal = True)
+        cont_size=st_dimensions(key="main")['width']
+        # st.bar_chart(df_social_media_presence.groupby('company').mean(),use_container_width=True,horizontal = True)
+
+
+        #st.bar_chart(df_social_media_presence.groupby('company').mean(), stack=False)
+        ue_1 = pd.DataFrame(df_social_media_presence)
+        companies = ue_1['company']
+        variables = ue_1[['posts','followers','following']]
+        x = np.arange(len(companies))  # the label locations
+        width = 0.3  # the width of the bars
+        multiplier = 0
+
+        plt.style.use("cyberpunk")
+        
+
+        # fig = plt.figure(dpi=200)
+        plt.rcParams['figure.figsize'] = [8, 3]
+        fig, ax = plt.subplots(layout='constrained')
+        fig.patch.set_alpha(0)
+        fig.set(facecolor="#0E1117")
+        plt.box(False)
+
+        for attribute, kpi in variables.items():
+            
+            offset = width * multiplier
+            rects = ax.bar(x + offset, kpi, width, label=attribute)
+            ax.bar_label(rects, color="red", fontsize=11, padding=3)
+            multiplier += 1
+       
+        # Add some text for labels, title and custom x-axis tick labels, etc.
+        
+        ax.set_ylabel('')
+        ax.set_xticks(x + width, companies, color='white', fontsize=10)
+        ax.legend(loc='upper center', ncols=3, fontsize = 11)
+        ax.grid(False)
+        ax.set(facecolor = "#0E1117")
+        ax.set_yticks([])
+        
+        
+        
+        st.pyplot(fig)
+
 
     with col2:
         c1,c2,c3 = st.columns(3)
@@ -165,8 +206,54 @@ with st.expander("Web Traffic and Global Presence", expanded=False):
     with col1:
         st.header("")
 
-        st.header("Monthly Rate Growth (%)")
-        st.bar_chart(df_rank_growth.groupby('company').mean().astype(str),color="#ffaa00",use_container_width=True, horizontal = True)
+        st.header("Monthly Rank Growth (%)")
+        plt.rcParams['figure.figsize'] = [8, 1]
+        fig, ax = plt.subplots()
+        fig.patch.set_alpha(0)
+        fig.set(facecolor="#0E1117")
+        plt.box(False)
+        ax.set_ylabel('')
+        ax.set_xticks(x, companies, color='white', fontsize=10)
+        ax.legend(loc='upper center', ncols=3, fontsize = 10)
+        ax.grid(False)
+        ax.set(facecolor = "#0E1117")
+        ax.set_yticks([])
+
+        r2 = ax.bar(df_rank_growth['company'],df_rank_growth['monthly_rank_growth'], color=['C0','C1'])
+        mplcyberpunk.add_bar_gradient(bars=r2)
+        ax.bar_label(r2, color="red", fontsize=10)
+        
+        st.pyplot(fig)
+
+
+        # df_rank_growth_2=st.dataframe(df_rank_growth.groupby('company').mean())
+        # df_rank_growth_2
+        # df_rank_growth_companies = df_rank_growth['company']
+        # df_rank_growth_value = df_rank_growth['monthly_rank_growth']
+        # x = np.arange(len(df_rank_growth_companies))  # the label locations
+        # # plt.style.use("cyberpunk")
+
+        # fig, (ax1, ax2) = plt.subplots(2,sharex=True)
+
+        # r1= ax1.bar(df_rank_growth_companies[0], df_rank_growth_value[0])
+        # ax1.bar_label(r1, color="red", fontsize=11)
+        # r2 = ax2.bar(df_rank_growth_companies[1], df_rank_growth_value[1])
+        # 
+        # # ax2.plot(x, -y)
+
+
+
+
+
+
+        # # rects = ax.bar(x, df_rank_growth_value)
+        
+  
+       
+        # # # Add some text for labels, title and custom x-axis tick labels, etc.
+
+
+        # st.pyplot(fig)
         
     with col2:
         st.header("")
@@ -185,7 +272,24 @@ with st.expander("User Engagement", expanded=False):
     col1, col2 = st.columns(2)
     with col1:
         st.header("Visit Duration (seconds)")
-        st.bar_chart(df__user_engagement.groupby('company').mean().astype(str),color="#bacc32",use_container_width=True, horizontal = True)
+        fig, ax = plt.subplots()
+        fig.patch.set_alpha(0)
+        fig.set(facecolor="#0E1117")
+        plt.box(False)
+        ax.set_ylabel('')
+        ax.legend(loc='upper center', ncols=3, fontsize = 10)
+        ax.grid(False)
+        ax.set(facecolor = "#0E1117")
+        ax.set_yticks([])
+
+        r3 = ax.bar(df__user_engagement['company'],df__user_engagement['visit_duration'], color=['C2','C3'])
+        mplcyberpunk.add_bar_gradient(bars=r3)
+        ax.bar_label(r3, color="red", fontsize=10)
+        st.pyplot(fig)
+
+
+
+
 
     with col2:
         c1,c2 = st.columns(2)
@@ -243,6 +347,7 @@ df_comp_full = df_comp_full.iloc[:,1:]
 df_comp_full.set_index("company", inplace=True)
 
 with st.expander("Full data", expanded=False):
-    st.dataframe(df_comp_full.groupby(['category','company']).sum().astype(str))
+    st.dataframe(df_comp_full.groupby(['category','company']).sum())
 
 st.divider()
+
