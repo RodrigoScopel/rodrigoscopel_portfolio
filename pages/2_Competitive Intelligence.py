@@ -218,7 +218,7 @@ with st.expander("Web Traffic and Global Presence", expanded=False):
         plt.box(False)
         ax.set_ylabel('')
         ax.set_xticks(x, companies, color='white', fontsize=10)
-        ax.legend(loc='upper center', ncols=3, fontsize = 10)
+        # ax.legend(loc='upper center', ncols=3, fontsize = 10)
         ax.grid(False)
         ax.set(facecolor = "#0E1117")
         ax.set_yticks([])
